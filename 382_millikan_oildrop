@@ -1,0 +1,29 @@
+def velocity(ti,tf,dist):
+    d=dist/1000
+    v=d/(tf-ti)
+    return v
+vf2=velocity(22.25,36.03,.4)
+vr2=velocity(36.03,58.08,.45)
+
+def q(vf,vr):
+    V=317
+    d=7.7*(10**(-3))
+    P=101325
+    b=8.2*(10**(-3))
+    eta=1.83*(10**(-5))
+    rho=870
+    prefactor=4*np.pi/3
+    bep=b/(2*P)
+    sqrt=(bep**2)+((9*eta*vf)/(2*rho*9.8))
+    middle=(sqrt**(1/2))-bep
+    postfactor=(rho*9.8*d*(vf+vr))/(V*vf)
+    q=prefactor*(middle**3)*postfactor
+    return q
+q1=q(0.000055,0.000167)
+q2=q(vf2,vr2)
+
+def num_e(vf,vr):
+    num=q(vf,vr)/(1.6*(10**(-19)))
+    return num
+n1=num_e(0.000055,0.000167)
+n2=num_e(vf2,vr2)
